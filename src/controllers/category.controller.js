@@ -12,3 +12,17 @@ exports.findAllWithProducts = async (req, res) => {
     })
     return res.status(200).json(categories)
 }
+
+exports.findByPkWithProducts = async (req, res) => {
+    const { id } = req.params;
+
+    const primarykey = !Number(id) || id > 7 ? 1 : id;
+
+    const categoryWithProducts = await Category.findByPk(primarykey ,{
+        include: Product
+    })
+
+    return res.status(200).json({
+        category: categoryWithProducts
+    })
+}
