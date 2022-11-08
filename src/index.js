@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+var cors = require('cors')
 const morgan = require('morgan');
 const sequelize = require('./database/db_connect.js');
 
@@ -8,6 +9,7 @@ const sequelize = require('./database/db_connect.js');
 app.set('port', process.env.PORT || 3000);
 
 // Middlewares
+app.use(cors())
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: true}));
 
