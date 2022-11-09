@@ -9,7 +9,10 @@ const sequelize = require('./database/db_connect.js');
 app.set('port', process.env.PORT || 3000);
 
 // Middlewares
-app.use(cors())
+app.use(cors({
+    origin: '*',
+    methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH']
+}));
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: true}));
 
