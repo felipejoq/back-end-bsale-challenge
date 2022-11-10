@@ -38,18 +38,35 @@ exports.findAll = async (req, res) => {
 }
 
 exports.findAllByNameSearch = async (req, res) => {
+
     const { page, size, term } = req.query;
 
-    const { limit, offset } = getPagination(page, size);
+    if(!size || !page){
 
-    const search_term = term ? { name: {[Op.like]: '%'+req.query.term.toLowerCase()+'%'}}: ''
+        const search_term = term ? { name: {[Op.like]: '%'+req.query.term.toLowerCase()+'%'}}: ''
+        const products = await Product.findAndCountAll({
+            where: search_term,
+            include: 'Category'
+        });
 
-    const products = await Product.findAndCountAll({
-        where: search_term, limit, offset,include: 'Category'
-    });
+        res.status(200).json(products);
 
-    const response = getPagingData(products, page, limit)
+    } else {
+        const { limit, offset } = getPagination(page, size);
 
-    res.status(200).json(response);
+        const search_term = term ? { name: {[Op.like]: '%'+req.query.term.toLowerCase()+'%'}}: ''
+
+        const products = await Product.findAndCountAll({
+            where: search_term,
+            limit,
+            offset,
+            include: 'Category'
+        });
+
+        const response = getPagingData(products, page, limit)
+
+        res.status(200).json(response);
+
+    }
 
 }
