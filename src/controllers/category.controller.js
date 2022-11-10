@@ -22,7 +22,5 @@ exports.findByPkWithProducts = async (req, res) => {
         include: Product
     })
 
-    return res.status(200).json({
-        category: categoryWithProducts
-    })
+    return res.status(200).json(categoryWithProducts)
 }
