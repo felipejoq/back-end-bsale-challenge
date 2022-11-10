@@ -1,6 +1,7 @@
 const Product = require('../database/models/Product');
 const { Op } = require('sequelize');
 const { response } = require('express');
+const Category = require('../database/models/Category');
 
 const getPagination = (page, size) => {
     const limit = Number(size) && Number(size) > 0 ? +Number(size) : 6;
@@ -43,14 +44,12 @@ exports.findAllByNameSearch = async (req, res) => {
 
     const search_term = term ? { name: {[Op.like]: '%'+req.query.term.toLowerCase()+'%'}}: ''
 
-    const data = await Product.findAndCountAll({
-        where: search_term, limit, offset
+    const products = await Product.findAndCountAll({
+        where: search_term, limit, offset,include: 'Category'
     });
 
-    const response = getPagingData(data, page, limit)
+    const response = getPagingData(products, page, limit)
 
-    return res.status(200).json({
-        response
-    });
+    res.status(200).json(response);
 
 }
