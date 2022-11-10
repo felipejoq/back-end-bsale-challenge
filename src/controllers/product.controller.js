@@ -50,7 +50,7 @@ exports.findAllByNameSearch = async (req, res) => {
     const response = getPagingData(data, page, limit)
 
     return res.status(200).json({
-        result: response
+        response
     });
 
 }
