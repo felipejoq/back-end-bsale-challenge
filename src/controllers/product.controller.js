@@ -44,12 +44,14 @@ exports.findAllByNameSearch = async (req, res) => {
     if(!size || !page){
 
         const search_term = term ? { name: {[Op.like]: '%'+req.query.term.toLowerCase()+'%'}}: ''
-        const products = await Product.findAndCountAll({
+        const data = await Product.findAndCountAll({
             where: search_term,
             include: 'Category'
         });
 
-        res.status(200).json(products);
+        const { count: totalItems, rows: products } = data;
+
+        return res.status(200).json({ totalItems, products })
 
     } else {
         const { limit, offset } = getPagination(page, size);
