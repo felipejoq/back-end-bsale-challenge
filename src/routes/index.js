@@ -1,9 +1,7 @@
 const router = require('express').Router();
 
 router.get('/', async (req, res) => {
-    res.status(200).json({
-        ok: true
-    });
+    return res.redirect('/store')
 });
 
 router.use('/category', require('./end_points/category'));
