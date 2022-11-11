@@ -2,13 +2,19 @@
 
 - El desafío consta del desarrollo de una tienda que muestre productos obtenidos desde una base de datos experimental dispuesta por Bsale y que el desarrollador debe implementar de tal forma que pueda servir los recursos de esa base de datos dividiendo el proyecto en dos grandes partes: Front-end y Back-end.
 
+#### Para instalar y ejecutar:
+
+1. Ejecutar en la carpeta raiz el comando: `npm install`
+2. Modificar las credenciales para conectarse a la Base de Datos en el archivo: `src/database/config_db.js`
+3. Luego ejecutar el comando de node: `node src/` ó `node/src/index.js`
+
 ### 🤖 Back-end:
 
 ##### Tecnologías y lenguajes utilizados, principalmente son:
 
 - **Node.js** (v. 18.x) [Source](https://nodejs.org/en/)
 - **Express.js** (v. 4.x) para la generación de un servidor sobre la tecnología de Node.js [Source](https://expressjs.com/)
-- **Sequelize (v. 6.x)** cómo ORM para interactuar con la Base de Datos que en este caso es con el gestor MySQL.
+- **Sequelize (v. 6.x)** cómo ORM para interactuar con la Base de Datos que en este caso es con el gestor MySQL. [Source](https://sequelize.org/)
 
 Con estas tecnologías se logró crear un servidor que independiente de que cliente lo solicite (web, mobile y otros), puede acceder a la lista de productos, lista de productos por categorías, lista de categorías y categorías con la lista de los productos que contiene.
 
